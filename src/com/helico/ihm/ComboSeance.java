@@ -21,7 +21,7 @@ import javafx.scene.control.ComboBox;
 public class ComboSeance {
 
 	private ComboBox<Seance> listeSeance = new ComboBox<Seance>();
-	private int id; // Identifiant de la s�ance s�lectionn�e
+	private int id; // Identifiant de la séance sélectionnée
 	
 	public ComboSeance() {
 		this.listeSeance.setPromptText("Veuillez sélectionner un moteur avant");
@@ -36,7 +36,7 @@ public class ComboSeance {
 			}
 			
 			
-			// D�finition des handlers
+			// Définition des handlers
 			this._setEventHandlers();
 			
 		} catch(SQLException e) {
@@ -49,7 +49,7 @@ public class ComboSeance {
 	}
 	
 	/**
-	 * Gestion des �v�nements...
+	 * Gestion des événements
 	 */
 	private void _setEventHandlers() {
 		ComboBox listeSeance = this.listeSeance;
