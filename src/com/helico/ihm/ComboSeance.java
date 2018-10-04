@@ -21,10 +21,10 @@ import javafx.scene.control.ComboBox;
 public class ComboSeance {
 
 	private ComboBox<Seance> listeSeance = new ComboBox<Seance>();
-	private int id; // Identifiant de la séance sélectionnée
+	private int id; // Identifiant de la sï¿½ance sï¿½lectionnï¿½e
 	
 	public ComboSeance() {
-		this.listeSeance.setPromptText("Liste vide");
+		this.listeSeance.setPromptText("Veuillez sÃ©lectionner un moteur avant");
 	}
 	
 	public void process() {
@@ -36,7 +36,7 @@ public class ComboSeance {
 			}
 			
 			
-			// Définition des handlers
+			// Dï¿½finition des handlers
 			this._setEventHandlers();
 			
 		} catch(SQLException e) {
@@ -49,7 +49,7 @@ public class ComboSeance {
 	}
 	
 	/**
-	 * Gestion des événements...
+	 * Gestion des ï¿½vï¿½nements...
 	 */
 	private void _setEventHandlers() {
 		ComboBox listeSeance = this.listeSeance;
@@ -73,13 +73,13 @@ public class ComboSeance {
 		// TODO Auto-generated method stub
 		
 		me.id = id;
-		// Générer la Combo avec les séances
-		System.out.println("Changement détecté : " + me.id);
+		// Gï¿½nï¿½rer la Combo avec les sï¿½ances
+		System.out.println("Changement dï¿½tectï¿½ : " + me.id);
 	}
 
 	private ArrayList<Seance> getSeances() throws SQLException {
 		Seance seance = new Seance(new Seances());
-		seance.select(this.id); // Pour récupérer la liste de toutes les séances pour cette variante
+		seance.select(this.id); // Pour rï¿½cupï¿½rer la liste de toutes les sï¿½ances pour cette variante
 		return seance.getSeances().get();
 	}
 	
