@@ -19,12 +19,15 @@ import com.helico.models.Model;
  *
  */
 public class Variante extends Crud implements com.helico.models.Variante {
+	
 	private Connection _cnx;
 	
 	private int id;
 	private String serial;
 	
 	private Variantes variantes;
+	
+	public Variante( ) {}
 	
 	public Variante(Variantes variantes) throws SQLException {
 		this._cnx = new MysqlConnect().getConnexion();

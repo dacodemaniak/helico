@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.helico.database.MysqlConnect;
+import com.helico.entities.collection.Seances;
+import com.helico.entities.collection.Variantes;
 import com.helico.models.Crud;
 
 public class Seance extends Crud implements com.helico.models.Seance {
@@ -18,9 +20,12 @@ public class Seance extends Crud implements com.helico.models.Seance {
 	private String code;
 	private int variante_id;
 	
-	public Seance() throws SQLException {
+	private Seances seances;
+	
+	public Seance(Seances seances) throws SQLException {
 		// TODO Auto-generated constructor stub
 		this._cnx = new MysqlConnect().getConnexion();
+		this.seances = seances;
 	}
 
 	
@@ -49,6 +54,9 @@ public class Seance extends Crud implements com.helico.models.Seance {
 		this.variante_id = variante_id;
 	}
 
+	public Seances getSeances() {
+		return this.seances;
+	}
 	@Override
 	public void add() {
 		// TODO Auto-generated method stub
@@ -88,7 +96,29 @@ public class Seance extends Crud implements com.helico.models.Seance {
 	@Override
 	public void select() {
 		// TODO Auto-generated method stub
-		
+	}
+	
+	public void select(int seanceId) {
+		String sqlStatement = "SELECT " + Seance._ID + "," + Seance._CODE + "," + Seance._DATE  + " FROM " + Seance.tableName + " WHERE " + Seance._VARIANTE_ID + " = ?";
+		// Préparation de la requête
+		try {
+			PreparedStatement statement = this._cnx.prepareStatement(sqlStatement);
+			statement.setInt(1, seanceId);
+			// Exécuter la requête proprement dite
+			ResultSet results = statement.executeQuery();
+			// Il reste à parcourir le résultat pour lire les données
+			while(results.next()) {
+				System.out.println(results.getInt(Variante._ID) + " | " + results.getString(Variante._SERIAL));
+				Seance seance = new Seance(this.seances);
+				seance.id = results.getInt(Seance._ID);
+				seance.code = results.getString(Seance._CODE);
+				seance.date = results.getString(Seance._DATE);
+				this.seances.push(seance);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	
 	private int _getLast() {
