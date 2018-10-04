@@ -33,6 +33,13 @@ public class ComboSeance {
 		try {
 			ArrayList<Seance> liste = this.getSeances(varianteId);
 			Iterator<Seance> it = liste.iterator();
+			
+			if (!it.hasNext()) {
+				this.listeSeance.setPromptText("Aucune séance pour cette variante");
+				this.listeSeance.getItems().clear();
+			} else {
+				this.listeSeance.setPromptText("Sélectionnez une séance (" + liste.size() + ")");
+			}
 			while(it.hasNext()) {
 				this.listeSeance.getItems().add(it.next());
 			}
