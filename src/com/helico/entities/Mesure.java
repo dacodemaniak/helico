@@ -2,9 +2,12 @@ package com.helico.entities;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.helico.database.MysqlConnect;
+import com.helico.entities.collection.Mesures;
+import com.helico.entities.collection.Variantes;
 import com.helico.models.Crud;
 
 
@@ -19,12 +22,18 @@ public class Mesure extends Crud implements com.helico.models.Mesure {
 	private float pw;
 	private int seance_id;
 	
+    private Mesures mesures;
 
+    
 
-	public Mesure() throws SQLException {
-		// TODO Auto-generated constructor stub
-		this._cnx = new MysqlConnect().getConnexion();
+	public Mesure()  {
 	}
+    
+	public Mesure(Mesures mesures) throws SQLException {
+		this._cnx = new MysqlConnect().getConnexion();
+		this.mesures = mesures;
+	}
+
 
 	
 	public int getId() {
@@ -46,7 +55,6 @@ public class Mesure extends Crud implements com.helico.models.Mesure {
 	public float getNg() {
 		return ng;
 	}
-
 	public void setNg(float ng) {
 		this.ng = ng;
 	}
@@ -54,7 +62,6 @@ public class Mesure extends Crud implements com.helico.models.Mesure {
 	public float getPw() {
 		return pw;
 	}
-
 	public void setPw(float pw) {
 		this.pw = pw;
 	}
@@ -62,10 +69,12 @@ public class Mesure extends Crud implements com.helico.models.Mesure {
 	public int getSeance_id() {
 		return seance_id;
 	}
-
-
 	public void setSeance_id(int seance_id) {
 		this.seance_id = seance_id;
+	}
+	
+	public Mesures getMesures() {
+		return mesures;
 	}
 	
 	@Override
@@ -104,7 +113,26 @@ public class Mesure extends Crud implements com.helico.models.Mesure {
 	@Override
 	public void select() {
 		// TODO Auto-generated method stub
+		String sqlStatement = "SELECT " + Mesure._T0 + "," + Mesure._NG + "," + Mesure._PW + "	FROM " + Mesure.tableName;
 		
+		// Préparation de la requête
+		try {
+			PreparedStatement statement = this._cnx.prepareStatement(sqlStatement);
+			// Exécuter la requête proprement dite
+			ResultSet results = statement.executeQuery();
+			int fetchSize = results.getFetchSize();
+			// Il reste à parcourir le résultat pour lire les données
+			while(results.next()) {
+				Mesure mesure = new Mesure(this.mesures);
+				mesure.t0 = results.getFloat(Mesure._T0);
+				mesure.ng = results.getFloat(Mesure._NG);
+				mesure.pw = results.getFloat(Mesure._PW);
+				this.mesures.push(mesure);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
+	
 }

@@ -3,8 +3,8 @@
  */
 package com.helico;
 
-import com.helico.ihm.ComboSeance;
-import com.helico.ihm.ComboVariante;
+import com.helico.ihm.*;
+import com.helico.entities.Mesure;
 import com.helico.entities.Seance;
 import com.helico.entities.Variante;
 
@@ -14,6 +14,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -45,11 +47,23 @@ public class App extends Application {
 	    ComboVariante variantes = new ComboVariante(seances);
 	    ComboBox<Variante> cbVariante = variantes.getCombo();
 	    
-
-	    
+	    //Création de la table des mesures
+	    TableViewMesure tableMesure = new TableViewMesure();
+        TableView<Mesure> tbMesure = tableMesure.getTable();
+        /*
+        tbMesure.setEditable(true);
+        
+        TableColumn t0NameCol = new TableColumn("T0");
+        TableColumn ngNameCol = new TableColumn("Ng");
+        TableColumn pwNameCol = new TableColumn("PWSD");
+        
+        tbMesure.getColumns().addAll(t0NameCol,ngNameCol,pwNameCol);
+        */
+        
 	    // Ajouter la boîte combo à la scène
 	    racine.getChildren().add(cbVariante);
 	    racine.getChildren().add(cbSeance);
+	    racine.getChildren().add(tbMesure);
 	    
 	    stage.setScene(scene);
 	    
