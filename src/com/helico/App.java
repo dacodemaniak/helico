@@ -37,17 +37,18 @@ public class App extends Application {
 	    Group racine = new Group();
 	    Scene scene = new Scene(racine,800,600,Color.AZURE);
 
-	    // Création du combo des séances
+	    // CrÃ©ation du combo des sÃ©ances
 	    ComboSeance seances = new ComboSeance();
 	    ComboBox<Seance> cbSeance = seances.getCombo();
 	    
-	    // Récupération du combo des variantes
+	    // Combo des variantes
 	    ComboVariante variantes = new ComboVariante(seances);
 	    ComboBox<Variante> cbVariante = variantes.getCombo();
 	    
+	    
 
 	    
-	    // Ajouter la boîte combo à la scène
+	    // Ajouter la boï¿½te combo ï¿½ la scï¿½ne
 	    racine.getChildren().add(cbVariante);
 	    racine.getChildren().add(cbSeance);
 	    

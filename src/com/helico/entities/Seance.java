@@ -62,17 +62,17 @@ public class Seance extends Crud implements com.helico.models.Seance {
 		// TODO Auto-generated method stub
           String sqlStatement = "INSERT INTO " + Seance.tableName + " (" + Seance._DATE + "," +  Seance._CODE + "," + Seance._VARIANTE_ID +") VALUES (?,?,?)";
 		
-		// Préparation de la requête
+		// Prï¿½paration de la requï¿½te
 		try {
 			PreparedStatement statement = this._cnx.prepareStatement(sqlStatement);
 			statement.setString(1, this.date);
 			statement.setString(2, this.code);
 			statement.setInt(3, this.variante_id);
 			
-			// Exécuter la requête proprement dite
+			// Exï¿½cuter la requï¿½te proprement dite
 			statement.execute();
 			
-			// Récupère le dernier identifiant créé dans la table
+			// Rï¿½cupï¿½re le dernier identifiant crï¿½ï¿½ dans la table
 			this.id = this._getLast();
 			
 		} catch (SQLException e) {
@@ -98,17 +98,19 @@ public class Seance extends Crud implements com.helico.models.Seance {
 		// TODO Auto-generated method stub
 	}
 	
-	public void select(int seanceId) {
+	public void select(int varianteId) {
 		String sqlStatement = "SELECT " + Seance._ID + "," + Seance._CODE + "," + Seance._DATE  + " FROM " + Seance.tableName + " WHERE " + Seance._VARIANTE_ID + " = ?";
-		// Préparation de la requête
+		String ctrlSql = "SELECT " + Seance._ID + "," + Seance._CODE + "," + Seance._DATE  + " FROM " + Seance.tableName + " WHERE " + Seance._VARIANTE_ID + " = " + varianteId;
+		// PrÃ©paration de la requÃªte
 		try {
 			PreparedStatement statement = this._cnx.prepareStatement(sqlStatement);
-			statement.setInt(1, seanceId);
-			// Exécuter la requête proprement dite
+			statement.setInt(1, varianteId);
+			// ExÃ©cuter la requÃªte proprement dit
 			ResultSet results = statement.executeQuery();
-			// Il reste à parcourir le résultat pour lire les données
+			
+			// Il reste Ã  parcourir le rÃ©sultat pour lire les donnÃ©es
 			while(results.next()) {
-				System.out.println(results.getInt(Variante._ID) + " | " + results.getString(Variante._SERIAL));
+				System.out.println(results.getInt(Seance._ID) + " | " + results.getString(Seance._DATE));
 				Seance seance = new Seance(this.seances);
 				seance.id = results.getInt(Seance._ID);
 				seance.code = results.getString(Seance._CODE);
@@ -121,16 +123,19 @@ public class Seance extends Crud implements com.helico.models.Seance {
 		}		
 	}
 	
+	public String toString() {
+		return this.code + " (" + this.date +")";
+	}
 	private int _getLast() {
 		String sqlStatement = "SELECT " + Seance._ID  + " FROM " + Seance.tableName + " ORDER BY " + Seance._ID + " DESC LIMIT 0,1";
 		
-		// Préparation de la requête
+		// PrÃ©paration de la requÃªte
 		try {
 			PreparedStatement statement = this._cnx.prepareStatement(sqlStatement);
 			
-			// Exécuter la requête proprement dite
+			// Exï¿½cuter la requï¿½te proprement dite
 			ResultSet results = statement.executeQuery();
-			// Il reste à parcourir le résultat pour lire les données
+			// Il reste ï¿½ parcourir le rï¿½sultat pour lire les donnï¿½es
 			results.next();
 			return results.getInt(Seance._ID);
 

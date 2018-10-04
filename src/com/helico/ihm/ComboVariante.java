@@ -21,7 +21,7 @@ import javafx.scene.control.ComboBox;
 public class ComboVariante {
 
 	private ComboBox<Variante> listeVariante = new ComboBox<Variante>();
-	private int id; // Identifiant de la variante sélectionnée
+	private int id; // Identifiant de la variante sÃ©lectionnÃ©e
 	private ComboSeance cbSeance;
 	
 	public ComboVariante(ComboSeance cbSeance) {
@@ -31,9 +31,12 @@ public class ComboVariante {
 			while(it.hasNext()) {
 				this.listeVariante.getItems().add(it.next());
 			}
-			this.listeVariante.setPromptText("Sélectionnez une variante");
+			this.listeVariante.setPromptText("SÃ©lectionnez une variante");
+			this.listeVariante.setLayoutX(50);
+			this.listeVariante.setLayoutY(10);
 			
-			// Définition des handlers
+			this.cbSeance = cbSeance;
+			// DÃ©finition des handlers
 			this._setEventHandlers();
 			
 		} catch(SQLException e) {
@@ -46,7 +49,7 @@ public class ComboVariante {
 	}
 	
 	/**
-	 * Gestion des événements...
+	 * Gestion des Ã©vÃ©nements
 	 */
 	private void _setEventHandlers() {
 		ComboBox listeVariante = this.listeVariante;
@@ -70,15 +73,16 @@ public class ComboVariante {
 		// TODO Auto-generated method stub
 		
 		me.id = id;
-		// Générer la Combo avec les séances
-		System.out.println("Changement détecté : " + me.id);
-		me.cbSeance.process();
+		
+		// GÃ©nÃ©rer la liste des sÃ©ances
+		System.out.println("Changement dÃ©tectÃ© : " + me.id);
+		me.cbSeance.process(id);
 		
 	}
 
 	private ArrayList<Variante> getVariantes() throws SQLException {
 		Variante variante = new Variante(new Variantes());
-		variante.select(); // Pour récupérer la liste de toutes les variantes
+		variante.select(); // Pour rï¿½cupï¿½rer la liste de toutes les variantes
 		return variante.getVariantes().get();
 	}
 	

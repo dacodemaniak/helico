@@ -25,11 +25,13 @@ public class ComboSeance {
 	
 	public ComboSeance() {
 		this.listeSeance.setPromptText("Veuillez sélectionner un moteur avant");
+		this.listeSeance.setLayoutX(50);
+		this.listeSeance.setLayoutY(50);
 	}
 	
-	public void process() {
+	public void process(int varianteId) {
 		try {
-			ArrayList<Seance> liste = this.getSeances();
+			ArrayList<Seance> liste = this.getSeances(varianteId);
 			Iterator<Seance> it = liste.iterator();
 			while(it.hasNext()) {
 				this.listeSeance.getItems().add(it.next());
@@ -73,13 +75,13 @@ public class ComboSeance {
 		// TODO Auto-generated method stub
 		
 		me.id = id;
-		// G�n�rer la Combo avec les s�ances
-		System.out.println("Changement d�tect� : " + me.id);
+		// Ici, filtrer le tableau des données
+		System.out.println("Changement détecté : " + me.id);
 	}
 
-	private ArrayList<Seance> getSeances() throws SQLException {
+	private ArrayList<Seance> getSeances(int varianteId) throws SQLException {
 		Seance seance = new Seance(new Seances());
-		seance.select(this.id); // Pour r�cup�rer la liste de toutes les s�ances pour cette variante
+		seance.select(varianteId); // Liste des séances pour cette variante
 		return seance.getSeances().get();
 	}
 	

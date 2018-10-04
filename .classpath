@@ -6,6 +6,6 @@
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/AELION/Downloads/mysql-connector-java-8.0.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jean-/Downloads/Développement/Java/mysql_connector/mysql-connector-java-8.0.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
